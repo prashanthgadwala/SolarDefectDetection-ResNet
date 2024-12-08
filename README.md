@@ -25,21 +25,25 @@ The dataset contains electroluminescence images of solar cells, provided in PNG 
    cd SolarDefectDetection-ResNet
 
 2. **Create and activate the conda environment**:
+    ```sh
     conda env create -f environment.yml
     conda activate solar-defect-detection
 
-3. **Install additional dependencies**:
+3. **Install additional dependencies**
+    ```sh
     pip install torch torchvision
 
 4. **Extract the dataset**:
+    ```sh
     unzip data/images.zip -d data/
 
 5. **Hyperparameter Tuning**:
     Experiment with different hyperparameters to improve model performance. Common parameters to tune include learning rate and batch size. Observe and document how changes affect the performance.
 
     **Run all tests**:
+            ```sh
                 python3 PytorchChallengeTests.py
-                
+
 ## References
 - [PyTorch Documentation](https://pytorch.org/docs/stable/index.html)
 - [ResNet Paper](https://arxiv.org/abs/1512.03385)
