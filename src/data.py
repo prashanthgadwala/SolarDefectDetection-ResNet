@@ -5,6 +5,7 @@ from skimage.io import imread
 from skimage.color import gray2rgb
 import numpy as np
 import torchvision as tv
+import pandas as pd
 
 train_mean = [0.59685254, 0.59685254, 0.59685254]
 train_std = [0.16043035, 0.16043035, 0.16043035]
@@ -24,10 +25,12 @@ class ChallengeDataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, idx):
-        img_name = Path('data') / self.data.iloc[idx, 0]
+        img_name = Path('data/images') / self.data.iloc[idx, 0]
         image = imread(img_name)
         image = gray2rgb(image)
         image = self.transform(image)
-        labels = torch.tensor(self.data.iloc[idx, 1:].values, dtype=torch.float32)
+        labels = self.data.iloc[idx, 1:].values
+        labels = pd.to_numeric(labels, errors='coerce')
+        labels = torch.tensor(labels, dtype=torch.float32)
         return image, labels
 

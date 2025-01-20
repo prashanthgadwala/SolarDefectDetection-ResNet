@@ -7,6 +7,9 @@ import tabulate
 import argparse
 import re
 import stat
+import sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
 ID = 4  # identifier for dispatcher
 
@@ -39,7 +42,7 @@ class TestDataset(unittest.TestCase):
     def setUp(self):
         # locate the csv file in file system and read it
         csv_path = ''
-        for root, _, files in os.walk('.'):
+        for root, _, files in os.walk(os.path.abspath(os.path.join(os.path.dirname(__file__), '../data'))):
             for name in files:
                 if name == 'data.csv':
                     csv_path = os.path.join(root, name)
