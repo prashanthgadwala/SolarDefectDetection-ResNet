@@ -4,8 +4,8 @@ This project implements a deep learning model using PyTorch to detect defects in
 
 ## Table of Contents
 - [Introduction](#introduction)
+- [Model Architecture](#model-architecture)
 - [Dataset](#dataset)
-- [Project Structure](#project-structure)
 - [Setup](#setup)
 - [Hyperparameter Tuning](#hyperparameter-tuning)
 - [References](#references)
@@ -14,6 +14,26 @@ This project implements a deep learning model using PyTorch to detect defects in
 Solar modules are composed of many solar cells that are subject to degradation, causing different types of defects. This project focuses on detecting two types of defects:
 1. **Cracks**: Ranging from very small to large cracks.
 2. **Inactive regions**: Caused mainly by cracks, leading to disconnected parts of the cell that do not contribute to power production.
+
+## Model Architecture
+The model is based on the ResNet architecture. Below are the architectural details:
+
+| Layer         | Description                                      |
+|---------------|--------------------------------------------------|
+| Conv2D        | Conv2D(3, 64, 7, 2)                              |
+| BatchNorm     | BatchNorm()                                      |
+| ReLU          | ReLU()                                           |
+| MaxPool       | MaxPool(3, 2)                                    |
+| ResBlock 1    | ResBlock(64, 64, 1)                              |
+| ResBlock 2    | ResBlock(64, 128, 2)                             |
+| ResBlock 3    | ResBlock(128, 256, 2)                            |
+| ResBlock 4    | ResBlock(256, 512, 2)                            |
+| GlobalAvgPool | AdaptiveAvgPool2d((1, 1))                        |
+| Flatten       | Flatten()                                        |
+| FC            | Linear(512, 2)                                   |
+| Sigmoid       | Sigmoid()                                        |
+
+Table 1: Architectural details for our ResNet. Convolutional layers are denoted by Conv2D(in_channels, out_channels, filter_size, stride). Max pooling is denoted MaxPool(pool_size, stride). ResBlock(in_channels, out_channels, stride) denotes one block within a residual network. Fully connected layers are represented by FC(in_features, out_features).
 
 ## Dataset
 The dataset contains electroluminescence images of solar cells, provided in PNG format. The filenames and corresponding labels are listed in `data/data.csv`. Each row in the CSV file contains the path to an image and two numbers indicating if the solar cell shows a "crack" and if the solar cell can be considered "inactive".

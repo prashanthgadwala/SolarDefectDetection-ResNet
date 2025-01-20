@@ -8,7 +8,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 
-data = pd.read_csv('data/data.csv', delimiter=';', header=None)
+data = pd.read_csv('../data/data.csv', delimiter=';')
 train_data, val_data = train_test_split(data, test_size=0.2, random_state=42)
 
 train_dataset = ChallengeDataset(train_data, mode='train')
@@ -25,6 +25,7 @@ optimizer = t.optim.Adam(resnet_model.parameters(), lr=0.001)
 trainer = Trainer(model=resnet_model, crit=criterion, optim=optimizer, train_dl=train_loader, val_test_dl=val_loader, cuda=t.cuda.is_available(), early_stopping_patience=5)
 
 res = trainer.fit(epochs=50)
+trainer.save_checkpoint(epoch=50, is_best=True)
 
 # plot the results
 plt.plot(np.arange(len(res[0])), res[0], label='train loss')

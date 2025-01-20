@@ -28,7 +28,7 @@ class ChallengeDataset(Dataset):
     def __getitem__(self, idx):
         data_loc = os.path.abspath(os.path.join(os.path.dirname(__file__), '../data'))
         img_name = Path(data_loc) / self.data.iloc[idx, 0]
-        print(f"Loading image from: {img_name}")
+        # print(f"Loading image from: {img_name}")
         image = imread(img_name)
         image = gray2rgb(image)
         image = self.transform(image)
