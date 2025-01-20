@@ -57,6 +57,11 @@ The dataset contains electroluminescence images of solar cells, provided in PNG 
     ```sh
     unzip data/images.zip -d data/
 
+5. **Run the train.py and main.py**:
+    ```sh
+    python train.py
+    python main.py
+
 5. **Hyperparameter Tuning**:
     Experiment with different hyperparameters to improve model performance. Common parameters to tune include learning rate and batch size. Observe and document how changes affect the performance.
 
