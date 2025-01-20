@@ -43,6 +43,7 @@ The dataset contains electroluminescence images of solar cells, provided in PNG 
     **Run all tests**:
         ```sh
         python3 PytorchChallengeTests.py
+        python3 PytorchChallengeTests.py Bonus
 
 ## References
 - [PyTorch Documentation](https://pytorch.org/docs/stable/index.html)
